@@ -1,0 +1,3203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- ============================================================
+       HEAD: page ki basic settings
+       ============================================================ -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vinayramkrishna Agro Tech Pvt. Ltd. - bio-fertilizers, organic manure, bio-pesticides, soil testing, plant care and farmer training.">
+  <title>Home | Vinayramkrishna Agro Tech Pvt. Ltd.</title>
+
+  <!-- Browser tab ka chhota icon (logo file se) -->
+  <link rel="icon" href="logoagro.png">
+
+
+  <!-- ============================================================
+       FONTS: Google Fonts
+       Heading ke liye Fraunces, normal text ke liye Nunito Sans
+       ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Nunito+Sans:wght@400;600;700&display=swap"
+    rel="stylesheet">
+
+    <!-- Remix Icons -->
+<link
+  href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+  rel="stylesheet"
+>
+
+
+  <!-- ============================================================
+       TAILWIND CSS (CDN se load hota hai, isliye internet chahiye)
+       ============================================================ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    // Apne brand ke colors aur fonts yahan set kiye hain.
+    // Ab hum bg-brand, text-dark, bg-gold jaise classes use kar sakte hain.
+    //
+    //   brand  = mukhya hara rang
+    //   dark   = gehra hara rang
+    //   soft   = bahut halka hara rang
+    //   cream  = page ka background
+    //   gold   = sunehra rang (buttons aur strip)
+    tailwind.config = {
+      theme: {
+        extend: {
+
+          colors: {
+            brand: '#137a3a',
+            dark: '#0b4d27',
+            soft: '#e6f2e2',
+            cream: '#f7faf1',
+            gold: '#e3b23c'
+          },
+
+          fontFamily: {
+            head: ['Fraunces', 'serif'],
+            body: ['"Nunito Sans"', 'sans-serif']
+          }
+
+        }
+      }
+    }
+  </script>
+
+
+  <!-- ============================================================
+       CUSTOM CSS #1: animations
+       Ye wo animations hain jo Tailwind me ready-made nahi aate
+       ============================================================ -->
+  <style>
+
+    /* ---------- Hero slide ki photo ---------- */
+
+    /* Slide ki photo halki si zoom-out hoti hai (Ken Burns effect) */
+    .slide.on .kb {
+      animation: kb 9s ease-out both;
+    }
+
+    @keyframes kb {
+      from {
+        transform: scale(1.18);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+
+    /* ---------- Hero slide ka text ---------- */
+
+    /* Shuru me text chhupa hua aur neeche hota hai */
+    .slide .fu {
+      opacity: 0;
+      transform: translateY(46px);
+    }
+
+    /* Slide active ho to text neeche se upar aata hai */
+    .slide.on .fu {
+      animation: fu 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    /* Har line thodi der baad aati hai */
+    .slide.on .fu:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+
+    .slide.on .fu:nth-child(3) {
+      animation-delay: 0.45s;
+    }
+
+    .slide.on .fu:nth-child(4) {
+      animation-delay: 0.65s;
+    }
+
+    @keyframes fu {
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+
+    /* ---------- Progress bar ---------- */
+
+    /* Slide ke saath bar bharti hai */
+    @keyframes fill {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
+
+    /* ---------- Girte hue patte ---------- */
+
+    .leaf {
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(115vh) rotate(360deg) translateX(80px);
+      }
+    }
+
+
+    /* ---------- Golden strip ---------- */
+
+    /* Strip side me chalti rehti hai */
+    .mq {
+      animation: mq 28s linear infinite;
+    }
+
+    @keyframes mq {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+
+    /* ---------- Contact button ---------- */
+
+    /* Button ki halki dhadkan */
+    .pulse-btn {
+      animation: pulse 2.4s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(19, 122, 58, 0.55);
+      }
+      70% {
+        box-shadow: 0 0 0 14px rgba(19, 122, 58, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(19, 122, 58, 0);
+      }
+    }
+
+  </style>
+
+
+  <!-- ============================================================
+       CUSTOM CSS #2: hamburger button (mobile menu ka button)
+       ============================================================ -->
+  <style>
+
+    /* Button ka dabba */
+    .menu-toggle {
+      width: 46px;
+      height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d6e7d8;
+      border-radius: 14px;
+      background: #e6f2e2;
+      color: #0b4d27;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .menu-toggle:hover {
+      background: #d8ecd7;
+      box-shadow: 0 5px 14px rgba(11, 77, 39, 0.1);
+    }
+
+    /* Dabane par thoda chhota hota hai */
+    .menu-toggle:active {
+      transform: scale(0.95);
+    }
+
+    /* Keyboard se aane par sunehri outline */
+    .menu-toggle:focus-visible {
+      outline: 3px solid #e3b23c;
+      outline-offset: 3px;
+    }
+
+    /* Teen lines ka dabba */
+    .menu-toggle-icon {
+      width: 21px;
+      height: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Har ek line */
+    .menu-toggle-icon i {
+      width: 100%;
+      height: 2px;
+      border-radius: 3px;
+      background: currentColor;
+      transform-origin: center;
+      transition: transform 0.22s ease, opacity 0.18s ease;
+    }
+
+    /* Menu khula ho to teen lines "X" ban jati hain */
+    .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0.4);
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-toggle-icon i:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+  </style>
+
+
+  <!-- ============================================================
+       CUSTOM CSS #3: mobile menu aur dropdown
+       (1279px tak ki screen = phone aur tablet)
+       ============================================================ -->
+  <style>
+
+    /* Desktop: ek samay par sirf hovered/focused dropdown khulega */
+    @media (min-width: 1280px) {
+      #menu > li.mobile-nav-dropdown {
+        position: relative;
+      }
+
+      #menu > li.mobile-nav-dropdown > ul.desktop-dropdown-menu {
+        display: none;
+      }
+
+      #menu > li.mobile-nav-dropdown.desktop-dropdown-open > ul.desktop-dropdown-menu {
+        display: block;
+      }
+    }
+
+  @media (max-width: 1279px) {
+  #menu {
+    position: absolute;
+    top: 78px;
+    left: 0;
+    right: 0;
+    background: white;
+    max-height: 80vh;
+    overflow-y: auto;
+    gap: 12px;
+  }
+
+  #menu.hidden {
+    display: none;
+  }
+
+  #menu:not(.hidden) {
+    display: flex;
+  }
+
+  /* Mobile dropdowns */
+  #menu .mobile-nav-dropdown ul {
+    display: none;
+  }
+
+ #menu .mobile-nav-dropdown.mobile-open ul {
+  display: block;
+}
+
+  /* Follow Us ke neeche extra margin nahi */
+  #menu .nav-share-item {
+    margin-bottom: 0;
+  }
+
+  /* Follow Us aur Contact ke beech 20px gap */
+  #menu .contact-menu-item {
+    margin-top: 20px;
+  }
+
+  /* Mobile screen par falling leaves ka size */
+  .leaf {
+    font-size: 20px;
+  }
+}
+  </style>
+
+
+  <!-- ============================================================
+       CUSTOM CSS #4: choti screen par overflow se bachav
+       (taaki side me scroll na aaye)
+       ============================================================ -->
+  <style>
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    main {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: clip;
+    }
+
+    main img,
+    main video,
+    main iframe {
+      max-width: 100%;
+    }
+
+    main .grid > *,
+    main .flex > * {
+      min-width: 0;
+    }
+
+    main h1,
+    main h2,
+    main h3,
+    main p {
+      overflow-wrap: break-word;
+    }
+
+    /* Bahut chhote phone par stats ek column me */
+    @media (max-width: 359px) {
+      main .grid.grid-cols-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Phone par section navbar ke neeche na chhupe */
+    @media (max-width: 639px) {
+      main section {
+        scroll-margin-top: 78px;
+      }
+    }
+
+    /* Jin logon ne "reduce motion" on rakha hai unke liye animation kam */
+    @media (prefers-reduced-motion: reduce) {
+
+      .menu-toggle,
+      .menu-toggle-icon i,
+      .nav-caret {
+        transition: none;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body class="font-body text-slate-800 bg-cream leading-relaxed">
+
+
+  <!-- ============================================================
+       1. NAVBAR (upar wali patti)
+       ============================================================ -->
+  <header
+    class="
+      sticky top-0 z-50
+      bg-cream/95 backdrop-blur
+      border-b border-green-100
+    "
+  >
+
+    <nav
+      class="
+        max-w-6xl mx-auto
+        px-5 h-[78px]
+        flex items-center justify-between
+      "
+    >
+
+      <!-- ---------- Logo + company ka naam ---------- -->
+      <a
+        href="index.html"
+        class="
+          flex items-center gap-3
+          font-head font-extrabold text-dark
+          text-sm leading-tight
+        "
+      >
+       
+        <img
+          src="logoagro.png.jpeg"
+          alt="Vinayramkrishna Agro Tech logo"
+          class="
+            h-12 w-12 sm:h-14 sm:w-14
+            shrink-0
+            rounded-full object-contain
+            bg-white
+            ring-2 ring-green-100
+            shadow-sm
+          "
+        >
+        <span>Vinayramkrishna<br>Agro Tech Pvt. Ltd.</span>
+      </a>
+
+
+      <!-- ---------- Hamburger button (sirf mobile par dikhta hai) ---------- -->
+      <button
+        id="burger"
+        type="button"
+        class="menu-toggle xl:hidden shrink-0"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+      </button>
+
+
+      <!-- ---------- Menu ----------
+           Mobile me chhupa rehta hai.
+           Bade screen (xl) par ek line me dikhta hai.
+      -->
+      <ul
+        id="menu"
+        class="
+          hidden xl:flex
+          absolute xl:static
+          top-[78px] left-0 right-0
+          flex-col xl:flex-row xl:items-center
+          gap-1
+          p-5 xl:p-0
+          bg-white xl:bg-transparent
+          shadow-lg xl:shadow-none
+          max-h-[80vh]
+          overflow-auto xl:overflow-visible
+        "
+      >
+
+        <!-- ===== Home ===== -->
+        <li>
+          <a
+            href="index.html"
+            class="
+              block px-4 py-2
+              rounded-full
+              font-semibold
+              bg-soft text-brand
+            "
+          >
+            Home
+          </a>
+        </li>
+
+
+        <!-- ===== About ===== -->
+        <li>
+          <a
+            href="about.html"
+            class="
+              block px-4 py-2
+              rounded-full
+              font-semibold
+              hover:bg-soft hover:text-brand
+              transition
+            "
+          >
+            About
+          </a>
+        </li>
+
+
+        <!-- ===== Products dropdown (4 pages) =====
+             "group" ka matlab: hover par andar wala menu khulega -->
+        <li class="group relative mobile-nav-dropdown">
+
+          <!-- Dropdown ka button -->
+          <button
+            type="button"
+            aria-expanded="false"
+            class="
+              nav-dropdown-toggle
+              block px-4 py-2
+              rounded-full
+              font-semibold cursor-pointer
+              group-hover:bg-soft group-hover:text-brand
+            "
+          >
+            Products <span class="nav-caret" aria-hidden="true">▾</span>
+          </button>
+
+          <!-- Dropdown ke andar ki list -->
+          <ul
+            class="
+              pl-4 xl:pl-2
+              xl:absolute xl:top-full xl:left-0
+              xl:hidden desktop-dropdown-menu
+              xl:min-w-[230px]
+              xl:bg-white xl:rounded-2xl
+              xl:p-2 xl:shadow-xl
+            "
+          >
+
+            <li>
+              <a
+                href="bio-fertilizers.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🌱 Bio-Fertilizers
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="organic-manure.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🍂 Organic Manure
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="bio-pesticides.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🛡️ Bio-Pesticides
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="seeds-soil-kits.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🌾 Seeds &amp; Soil Kits
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+
+        <!-- ===== Services dropdown (6 pages) =====
+             NAYA: Plant Care aur Training yahan jode gaye hain -->
+        <li class="group relative mobile-nav-dropdown">
+
+          <!-- Dropdown ka button -->
+          <button
+            type="button"
+            aria-expanded="false"
+            class="
+              nav-dropdown-toggle
+              block px-4 py-2
+              rounded-full
+              font-semibold cursor-pointer
+              group-hover:bg-soft group-hover:text-brand
+            "
+          >
+            Services <span class="nav-caret" aria-hidden="true">▾</span>
+          </button>
+
+          <!-- Dropdown ke andar ki list -->
+          <ul
+            class="
+              pl-4 xl:pl-2
+              xl:absolute xl:top-full xl:left-0
+              xl:hidden desktop-dropdown-menu
+              xl:min-w-[230px]
+              xl:bg-white xl:rounded-2xl
+              xl:p-2 xl:shadow-xl
+            "
+          >
+
+            <li>
+              <a
+                href="soil-testing.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🧪 Soil Testing
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="agri-consultancy.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                📋 Agri Consultancy
+              </a>
+            </li>
+
+            <!-- NAYA: Plant Care -->
+            <li>
+              <a
+                href="plant-care.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🌿 Plant Care
+              </a>
+            </li>
+
+
+
+            <!-- NAYA: Training -->
+            <li>
+              <a
+                href="training.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🧑‍🏫 Training
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="internship.html"
+                class="
+                  block px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft hover:text-brand
+                "
+              >
+                🎓 Internship
+              </a>
+            </li>
+
+          </ul>
+        </li>
+
+
+        <!-- ===== Career ===== -->
+        <li>
+          <a
+            href="career.html"
+            class="
+              block px-4 py-2
+              rounded-full
+              font-semibold
+              hover:bg-soft hover:text-brand
+              transition
+            "
+          >
+            Career
+          </a>
+        </li>
+
+
+        <!-- ===== Follow us dropdown =====
+             xl:mx-5 se Career aur Contact ke beech gap aata hai -->
+       <li class="group relative mobile-nav-dropdown nav-share-item xl:mx-5">
+
+          <button
+            type="button"
+            aria-expanded="false"
+            class="
+              nav-dropdown-toggle nav-share-toggle
+              block w-fit
+              px-4 py-2
+              rounded-full
+              font-semibold cursor-pointer
+              border-2 border-green-200
+              bg-white
+            "
+          >
+            ⤴ follow us <span class="nav-caret" aria-hidden="true">▾</span>
+          </button>
+
+          <ul
+            class="
+              pl-4 xl:pl-2
+              xl:absolute xl:top-full xl:right-0
+              xl:hidden desktop-dropdown-menu
+              xl:min-w-[170px]
+              xl:bg-white xl:rounded-2xl
+              xl:p-2 xl:shadow-xl
+            "
+          >
+
+            <li>
+              <button
+                data-share="instagram"
+                class="
+                  w-full text-left
+                  px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft
+                "
+              >
+                📸 Instagram
+              </button>
+            </li>
+
+            <li>
+              <button
+                data-share="linkedin"
+                class="
+                  w-full text-left
+                  px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft
+                "
+              >
+                💼 LinkedIn
+              </button>
+            </li>
+
+            <li>
+              <button
+                data-share="facebook"
+                class="
+                  w-full text-left
+                  px-4 py-2
+                  rounded-xl
+                  text-sm font-semibold
+                  hover:bg-soft
+                "
+              >
+                👍 Facebook
+              </button>
+            </li>
+
+          </ul>
+        </li>
+
+
+        <!-- ===== Contact: bada gradient button ===== -->
+      <li class="contact-menu-item">
+          <a
+            href="get-started.html"
+            class="
+              pulse-btn
+              block text-center
+              px-8 py-3
+              rounded-full
+              font-extrabold text-white
+              bg-gradient-to-br from-green-500 to-dark
+              shadow-lg
+              hover:from-gold hover:to-yellow-300
+              hover:text-dark hover:scale-105
+              transition
+            "
+          >
+            Contact
+          </a>
+        </li>
+
+      </ul>
+      <!-- Menu khatam -->
+
+    </nav>
+  </header>
+  <!-- Navbar khatam -->
+
+
+
+  <main>
+
+
+  <!-- ============================================================
+       2. HERO SLIDER (4 slides)
+          Har slide me: photo + tag + heading + text + 2 buttons
+       ============================================================ -->
+  <section
+    id="hero"
+    class="
+      relative
+      h-[calc(100vh-78px)]
+      min-h-[560px] max-h-[780px]
+      overflow-hidden
+      bg-dark text-white
+    "
+  >
+
+    <!-- ---------- Girte hue patte (sirf sajawat ke liye) ---------- -->
+    <span
+      class="leaf absolute -top-10 z-20 text-2xl opacity-70 pointer-events-none"
+      style="left: 8%; animation-duration: 9s;"
+    >🍃</span>
+
+    <span
+      class="leaf absolute -top-10 z-20 text-2xl opacity-70 pointer-events-none"
+      style="left: 30%; animation-duration: 12s; animation-delay: 2s;"
+    >🌿</span>
+
+    <span
+      class="leaf absolute -top-10 z-20 text-2xl opacity-70 pointer-events-none"
+      style="left: 55%; animation-duration: 10s; animation-delay: 4s;"
+    >🍂</span>
+
+    <span
+      class="leaf absolute -top-10 z-20 text-2xl opacity-70 pointer-events-none"
+      style="left: 80%; animation-duration: 13s; animation-delay: 1s;"
+    >🍃</span>
+
+
+    <!-- ==========================================================
+         SLIDE 1: Bio-Fertilizers
+         "on" class mila hai, isliye pehle yehi dikhti hai
+         ========================================================== -->
+    <div
+      class="
+        slide on
+        absolute inset-0
+        opacity-0 [&.on]:opacity-100 [&.on]:z-10
+        transition-opacity duration-1000
+      "
+    >
+
+      <!-- Background photo -->
+      <div
+        class="kb absolute inset-0 bg-cover bg-center bg-dark"
+        style="background-image: url('https://images.unsplash.com/photo-1620200423727-8127f75d7f53?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"
+      ></div>
+
+      <!-- Photo ke upar hara parda, taaki text saaf dikhe -->
+      <div
+        class="
+          absolute inset-0
+          bg-gradient-to-r
+          from-green-950/90 via-green-950/55 to-transparent
+        "
+      ></div>
+
+      <!-- Slide ka text -->
+      <div
+        class="
+          relative h-full
+          max-w-6xl mx-auto
+          px-7 md:px-24
+          flex flex-col justify-center items-start
+        "
+      >
+
+        <!-- Chhota tag -->
+        <span
+          class="
+            fu
+            mb-5 px-5 py-2
+            rounded-full
+            border border-gold bg-gold/20
+            text-yellow-200 text-sm font-bold
+          "
+        >
+          Bio-Fertilizers
+        </span>
+
+        <!-- Bada heading -->
+        <h1
+          class="
+            fu
+            font-head font-extrabold
+            text-4xl md:text-6xl lg:text-7xl
+            leading-tight max-w-3xl
+          "
+        >
+          Healthy soil grows stronger crops
+        </h1>
+
+        <!-- Chhota paragraph -->
+        <p
+          class="
+            fu
+            mt-5 mb-8
+            text-lg text-green-50
+            max-w-xl
+          "
+        >
+          Living microbes that feed your soil and cut input costs, season after season.
+        </p>
+
+        <!-- Do buttons -->
+        <div class="fu flex flex-wrap gap-3">
+
+          <a
+            href="bio-fertilizers.html"
+            class="
+              px-7 py-3
+              rounded-full
+              bg-gold text-dark font-bold
+              hover:bg-yellow-300
+              transition
+            "
+          >
+            Explore Bio-Fertilizers
+          </a>
+
+          <a
+            href="get-started.html"
+            class="
+              px-7 py-3
+              rounded-full
+              border-2 border-white/70
+              font-bold
+              hover:bg-white hover:text-dark
+              transition
+            "
+          >
+            Get Started
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <!-- Slide 1 khatam -->
+
+
+    <!-- ==========================================================
+         SLIDE 2: Organic Manure
+         ========================================================== -->
+    <div
+      class="
+        slide
+        absolute inset-0
+        opacity-0 [&.on]:opacity-100 [&.on]:z-10
+        transition-opacity duration-1000
+      "
+    >
+
+      <!-- Background photo -->
+      <div
+        class="kb absolute inset-0 bg-cover bg-center bg-dark"
+        style="background-image: url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1920&q=80');"
+      ></div>
+
+      <!-- Hara parda -->
+      <div
+        class="
+          absolute inset-0
+          bg-gradient-to-r
+          from-green-950/90 via-green-950/55 to-transparent
+        "
+      ></div>
+
+      <!-- Slide ka text -->
+      <div
+        class="
+          relative h-full
+          max-w-6xl mx-auto
+          px-7 md:px-24
+          flex flex-col justify-center items-start
+        "
+      >
+
+        <span
+          class="
+            fu
+            mb-5 px-5 py-2
+            rounded-full
+            border border-gold bg-gold/20
+            text-yellow-200 text-sm font-bold
+          "
+        >
+          Organic Manure
+        </span>
+
+        <h1
+          class="
+            fu
+            font-head font-extrabold
+            text-4xl md:text-6xl lg:text-7xl
+            leading-tight max-w-3xl
+          "
+        >
+          Naturally grown. Richly harvested.
+        </h1>
+
+        <p
+          class="
+            fu
+            mt-5 mb-8
+            text-lg text-green-50
+            max-w-xl
+          "
+        >
+          Vermicompost and enriched manure that rebuild soil structure and lift yield.
+        </p>
+
+        <div class="fu flex flex-wrap gap-3">
+
+          <a
+            href="organic-manure.html"
+            class="
+              px-7 py-3
+              rounded-full
+              bg-gold text-dark font-bold
+              hover:bg-yellow-300
+              transition
+            "
+          >
+            See Organic Manure
+          </a>
+
+          <a
+            href="get-started.html"
+            class="
+              px-7 py-3
+              rounded-full
+              border-2 border-white/70
+              font-bold
+              hover:bg-white hover:text-dark
+              transition
+            "
+          >
+            Get Started
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 khatam -->
+
+
+    <!-- ==========================================================
+         SLIDE 3: Agri Consultancy
+         ========================================================== -->
+    <div
+      class="
+        slide
+        absolute inset-0
+        opacity-0 [&.on]:opacity-100 [&.on]:z-10
+        transition-opacity duration-1000
+      "
+    >
+
+      <!-- Background photo -->
+      <div
+        class="kb absolute inset-0 bg-cover bg-center bg-dark"
+        style="background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1920&q=80');"
+      ></div>
+
+      <!-- Hara parda -->
+      <div
+        class="
+          absolute inset-0
+          bg-gradient-to-r
+          from-green-950/90 via-green-950/55 to-transparent
+        "
+      ></div>
+
+      <!-- Slide ka text -->
+      <div
+        class="
+          relative h-full
+          max-w-6xl mx-auto
+          px-7 md:px-24
+          flex flex-col justify-center items-start
+        "
+      >
+
+        <span
+          class="
+            fu
+            mb-5 px-5 py-2
+            rounded-full
+            border border-gold bg-gold/20
+            text-yellow-200 text-sm font-bold
+          "
+        >
+          Agri Consultancy
+        </span>
+
+        <h1
+          class="
+            fu
+            font-head font-extrabold
+            text-4xl md:text-6xl lg:text-7xl
+            leading-tight max-w-3xl
+          "
+        >
+          Expert guidance, right in your field
+        </h1>
+
+        <p
+          class="
+            fu
+            mt-5 mb-8
+            text-lg text-green-50
+            max-w-xl
+          "
+        >
+          Our agri experts plan crops, schedule nutrients and support you till harvest.
+        </p>
+
+        <div class="fu flex flex-wrap gap-3">
+
+          <a
+            href="agri-consultancy.html"
+            class="
+              px-7 py-3
+              rounded-full
+              bg-gold text-dark font-bold
+              hover:bg-yellow-300
+              transition
+            "
+          >
+            Our Services
+          </a>
+
+          <a
+            href="get-started.html"
+            class="
+              px-7 py-3
+              rounded-full
+              border-2 border-white/70
+              font-bold
+              hover:bg-white hover:text-dark
+              transition
+            "
+          >
+            Get Started
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 khatam -->
+
+
+    <!-- ==========================================================
+         SLIDE 4: Internship Program
+         ========================================================== -->
+    <div
+      class="
+        slide
+        absolute inset-0
+        opacity-0 [&.on]:opacity-100 [&.on]:z-10
+        transition-opacity duration-1000
+      "
+    >
+
+      <!-- Background photo -->
+      <div
+        class="kb absolute inset-0 bg-cover bg-center bg-dark"
+        style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1920&q=80');"
+      ></div>
+
+      <!-- Hara parda -->
+      <div
+        class="
+          absolute inset-0
+          bg-gradient-to-r
+          from-green-950/90 via-green-950/55 to-transparent
+        "
+      ></div>
+
+      <!-- Slide ka text -->
+      <div
+        class="
+          relative h-full
+          max-w-6xl mx-auto
+          px-7 md:px-24
+          flex flex-col justify-center items-start
+        "
+      >
+
+        <span
+          class="
+            fu
+            mb-5 px-5 py-2
+            rounded-full
+            border border-gold bg-gold/20
+            text-yellow-200 text-sm font-bold
+          "
+        >
+          Internship Program
+        </span>
+
+        <h1
+          class="
+            fu
+            font-head font-extrabold
+            text-4xl md:text-6xl lg:text-7xl
+            leading-tight max-w-3xl
+          "
+        >
+          Learn. Grow. Lead the next harvest.
+        </h1>
+
+        <p
+          class="
+            fu
+            mt-5 mb-8
+            text-lg text-green-50
+            max-w-xl
+          "
+        >
+          Hands-on internships for agriculture students with real farms and real lab work.
+        </p>
+
+        <div class="fu flex flex-wrap gap-3">
+
+          <a
+            href="internship.html"
+            class="
+              px-7 py-3
+              rounded-full
+              bg-gold text-dark font-bold
+              hover:bg-yellow-300
+              transition
+            "
+          >
+            Apply for Internship
+          </a>
+
+          <a
+            href="get-started.html"
+            class="
+              px-7 py-3
+              rounded-full
+              border-2 border-white/70
+              font-bold
+              hover:bg-white hover:text-dark
+              transition
+            "
+          >
+            Get Started
+          </a>
+
+        </div>
+      </div>
+    </div>
+    <!-- Slide 4 khatam -->
+
+
+    <!-- ---------- Left arrow ---------- -->
+    <button
+      id="prev"
+      aria-label="Previous"
+      class="
+        hidden md:block
+        absolute left-5 top-1/2 -translate-y-1/2
+        z-30
+        w-14 h-14
+        rounded-full
+        border-2 border-white/60
+        bg-white/10 backdrop-blur
+        text-3xl
+        hover:bg-gold hover:text-dark
+        transition
+      "
+    >
+      ‹
+    </button>
+
+    <!-- ---------- Right arrow ---------- -->
+    <button
+      id="next"
+      aria-label="Next"
+      class="
+        hidden md:block
+        absolute right-5 top-1/2 -translate-y-1/2
+        z-30
+        w-14 h-14
+        rounded-full
+        border-2 border-white/60
+        bg-white/10 backdrop-blur
+        text-3xl
+        hover:bg-gold hover:text-dark
+        transition
+      "
+    >
+      ›
+    </button>
+
+
+    <!-- ---------- Neeche ke dots (active dot lamba ho jata hai) ---------- -->
+    <div
+      id="dots"
+      class="
+        absolute bottom-8 left-1/2 -translate-x-1/2
+        z-30
+        flex gap-2
+      "
+    >
+      <i class="dot h-3 w-3 rounded-full bg-white/50 cursor-pointer transition-all duration-500"></i>
+      <i class="dot h-3 w-3 rounded-full bg-white/50 cursor-pointer transition-all duration-500"></i>
+      <i class="dot h-3 w-3 rounded-full bg-white/50 cursor-pointer transition-all duration-500"></i>
+      <i class="dot h-3 w-3 rounded-full bg-white/50 cursor-pointer transition-all duration-500"></i>
+    </div>
+
+
+    <!-- ---------- Slide number (01 / 04) ---------- -->
+    <div
+      class="
+        absolute right-7 md:right-24 bottom-6
+        z-30
+        font-head text-green-100
+      "
+    >
+      <b id="count" class="text-4xl text-white">01</b> / 04
+    </div>
+
+
+    <!-- ---------- Sabse neeche progress bar ---------- -->
+    <div
+      class="
+        absolute bottom-0 inset-x-0
+        h-1.5
+        bg-white/15
+        z-30
+      "
+    >
+      <i id="bar" class="block h-full bg-gold w-0"></i>
+    </div>
+
+  </section>
+  <!-- Hero slider khatam -->
+
+
+
+  <!-- ============================================================
+       3. GOLDEN STRIP (side me chalti hui line)
+          Dobara wahi list isliye hai taaki strip beech me khali na dikhe
+       ============================================================ -->
+  <div
+    class="
+      bg-gold text-dark
+      overflow-hidden whitespace-nowrap
+      py-3.5
+      font-head font-extrabold text-xl
+    "
+  >
+    <div class="mq inline-block">
+
+      <!-- Pehli baar ki list -->
+      <span class="mx-6">🌱 Bio-Fertilizers</span>
+      <span class="mx-6">🍂 Organic Manure</span>
+      <span class="mx-6">🛡️ Bio-Pesticides</span>
+      <span class="mx-6">🌾 Seeds &amp; Soil Kits</span>
+      <span class="mx-6">🧪 Soil Testing</span>
+      <span class="mx-6">📋 Agri Consultancy</span>
+      <span class="mx-6">🌿 Plant Care</span>
+      
+      <span class="mx-6">🧑‍🏫 Training</span>
+      <span class="mx-6">🎓 Internship</span>
+
+      <!-- Wahi list dobara -->
+      <span class="mx-6">🌱 Bio-Fertilizers</span>
+      <span class="mx-6">🍂 Organic Manure</span>
+      <span class="mx-6">🛡️ Bio-Pesticides</span>
+      <span class="mx-6">🌾 Seeds &amp; Soil Kits</span>
+      <span class="mx-6">🧪 Soil Testing</span>
+      <span class="mx-6">📋 Agri Consultancy</span>
+      <span class="mx-6">🌿 Plant Care</span>
+      
+      <span class="mx-6">🧑‍🏫 Training</span>
+      <span class="mx-6">🎓 Internship</span>
+
+    </div>
+  </div>
+  <!-- Golden strip khatam -->
+
+
+
+  <!-- ============================================================
+       4. STATS (numbers ginti se badhte hain)
+          data-count = jahan tak ginti jani hai
+          data-suffix = number ke baad ka chinh (jaise %)
+       ============================================================ -->
+  <section
+    class="
+      bg-gradient-to-br from-brand to-dark
+      text-white
+      py-11
+    "
+  >
+    <div
+      class="
+        max-w-6xl mx-auto px-5
+        grid grid-cols-2 md:grid-cols-4
+        gap-6
+        text-center
+      "
+    >
+
+      <!-- Stat 1: saal (ginti nahi hoti) -->
+      <div
+        data-reveal
+        class="opacity-0 translate-y-10 transition duration-700"
+      >
+        <b class="block font-head text-4xl font-extrabold">2022</b>
+        <span class="text-green-100">Year we started</span>
+      </div>
+
+      <!-- Stat 2: product lines -->
+      <div
+        data-reveal
+        class="opacity-0 translate-y-10 transition duration-700"
+      >
+        <b
+          data-count="4"
+          class="block font-head text-4xl font-extrabold"
+        >4</b>
+        <span class="text-green-100">Product lines</span>
+      </div>
+
+      <!-- Stat 3: farmer services (ab 6 hain) -->
+      <div
+        data-reveal
+        class="opacity-0 translate-y-10 transition duration-700"
+      >
+        <b
+          data-count="6"
+          class="block font-head text-4xl font-extrabold"
+        >6</b>
+        <span class="text-green-100">Farmer services</span>
+      </div>
+
+      <!-- Stat 4: soil health focus -->
+      <div
+        data-reveal
+        class="opacity-0 translate-y-10 transition duration-700"
+      >
+        <b
+          data-count="100"
+          data-suffix="%"
+          class="block font-head text-4xl font-extrabold"
+        >100%</b>
+        <span class="text-green-100">Focus on soil health</span>
+      </div>
+
+    </div>
+  </section>
+  <!-- Stats khatam -->
+
+
+
+  <!-- ============================================================
+       5. PRODUCTS (4 cards)
+          Card par hover karo: upar uthta hai, icon ghoomta hai,
+          neeche ki line badhti hai
+       ============================================================ -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-5">
+
+      <!-- Section ka heading -->
+      <div
+        data-reveal
+        class="
+          opacity-0 translate-y-10 transition duration-700
+          text-center max-w-2xl mx-auto mb-11
+        "
+      >
+        <h2 class="font-head font-extrabold text-dark text-3xl md:text-4xl">
+          What we offer
+        </h2>
+        <p class="text-slate-600 mt-3">
+          Everything a farm needs, from inputs that build the soil to advice that builds confidence.
+        </p>
+      </div>
+
+      <!-- Cards ki grid: mobile 1, tablet 2, laptop 4 -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+
+        <!-- ===== Product card 1: Bio-Fertilizers ===== -->
+        <a
+          href="bio-fertilizers.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <!-- Gol icon -->
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🌱
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Bio-Fertilizers
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Living microbes that feed the soil and the crop.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <!-- Neeche ki line jo hover par badhti hai -->
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Product card 2: Organic Manure ===== -->
+        <a
+          href="organic-manure.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🍂
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Organic Manure
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Enriched compost and vermicompost for lasting soil health.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Product card 3: Bio-Pesticides ===== -->
+        <a
+          href="bio-pesticides.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🛡️
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Bio-Pesticides
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Plant-based crop protection with low residue.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Product card 4: Seeds & Soil Kits ===== -->
+        <a
+          href="seeds-soil-kits.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🌾
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Seeds &amp; Soil Kits
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Quality seed and simple kits to know your field better.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+      </div>
+      <!-- Cards ki grid khatam -->
+
+    </div>
+  </section>
+  <!-- Products khatam -->
+
+
+
+  <!-- ============================================================
+       6. ABOUT (photo + text)
+       ============================================================ -->
+  <section class="py-20 bg-white">
+    <div
+      class="
+        max-w-6xl mx-auto px-5
+        grid md:grid-cols-2
+        gap-14 items-center
+      "
+    >
+
+      <!-- ---------- Left: photo (left se aati hai) ---------- -->
+      <div
+        data-reveal
+        class="
+          opacity-0 -translate-x-10 transition duration-700
+          relative
+          rounded-3xl min-h-[380px]
+          bg-cover bg-center bg-dark
+          hover:scale-[1.03] hover:-rotate-1
+        "
+        style="background-image: url('https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1000&q=80');"
+      >
+        <!-- Photo ke andar safed patli frame -->
+        <span
+          class="
+            absolute inset-3.5
+            border-2 border-white/60
+            rounded-2xl
+          "
+        ></span>
+      </div>
+
+      <!-- ---------- Right: text (right se aata hai) ---------- -->
+      <div
+        data-reveal
+        class="opacity-0 translate-x-10 transition duration-700"
+      >
+
+        <h2 class="font-head font-extrabold text-dark text-3xl md:text-4xl mb-4">
+          Growing with farmers since 2022
+        </h2>
+
+        <p class="text-slate-600 mb-4">
+          We started with one belief: when the soil is healthy, everything else follows.
+          Today we supply tested bio-inputs and work side by side with farmers on their own fields.
+        </p>
+
+        <!-- Tick wali list -->
+        <ul class="my-5 space-y-2 font-semibold">
+
+          <li class="flex items-center gap-3">
+            <span
+              class="
+                w-6 h-6
+                rounded-full bg-brand text-white
+                text-xs grid place-items-center
+              "
+            >✓</span>
+            Bio-based inputs with low chemical load
+          </li>
+
+          <li class="flex items-center gap-3">
+            <span
+              class="
+                w-6 h-6
+                rounded-full bg-brand text-white
+                text-xs grid place-items-center
+              "
+            >✓</span>
+            Field visits and simple soil reports
+          </li>
+
+          <li class="flex items-center gap-3">
+            <span
+              class="
+                w-6 h-6
+                rounded-full bg-brand text-white
+                text-xs grid place-items-center
+              "
+            >✓</span>
+            Training in local language
+          </li>
+
+        </ul>
+
+        <a
+          href="about.html"
+          class="
+            inline-block
+            px-7 py-3
+            rounded-full
+            bg-brand text-white font-bold
+            hover:bg-dark hover:-translate-y-0.5
+            transition
+          "
+        >
+          Know more about us
+        </a>
+
+      </div>
+    </div>
+  </section>
+  <!-- About khatam -->
+
+
+
+  <!-- ============================================================
+       7. SERVICES (ab 6 cards)
+          NAYA: Plant Care aur Training cards jode gaye hain
+       ============================================================ -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-5">
+
+      <!-- Section ka heading -->
+      <div
+        data-reveal
+        class="
+          opacity-0 translate-y-10 transition duration-700
+          text-center max-w-2xl mx-auto mb-11
+        "
+      >
+        <h2 class="font-head font-extrabold text-dark text-3xl md:text-4xl">
+          Our services
+        </h2>
+        <p class="text-slate-600 mt-3">
+          From testing your soil to training your team.
+        </p>
+      </div>
+
+      <!-- Cards ki grid: mobile 1, tablet 2, laptop 3 (6 cards = 2 line) -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+        <!-- ===== Service card 1: Soil Testing ===== -->
+        <a
+          href="soil-testing.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🧪
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Soil Testing
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Know what your soil needs before you spend on inputs.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Service card 2: Agri Consultancy ===== -->
+        <a
+          href="agri-consultancy.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            📋
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Agri Consultancy
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Practical, field-level guidance from sowing to harvest.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Service card 3: Plant Care (NAYA) ===== -->
+        <a
+          href="plant-care.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🌿
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Plant Care
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Nutrition, pest watch and regular care to keep every plant healthy.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Service card 4: Farmer Training ===== -->
+        <a
+          href="farmer-training.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            👩‍🌾
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Farmer Training
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Workshops that turn good practice into daily habit.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Service card 5: Training (NAYA) ===== -->
+        <a
+          href="training.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🧑‍🏫
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Training
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Skill programs for students, field staff and agri-entrepreneurs.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+
+        <!-- ===== Service card 6: Internship ===== -->
+        <a
+          href="internship.html"
+          data-reveal
+          class="
+            group relative
+            overflow-hidden
+            rounded-3xl bg-white
+            p-7
+            border border-green-100
+            opacity-0 translate-y-10
+            transition duration-500
+            hover:-translate-y-2 hover:shadow-2xl
+          "
+        >
+          <div
+            class="
+              w-16 h-16
+              rounded-full bg-soft
+              grid place-items-center
+              text-3xl mb-4
+              transition duration-500
+              group-hover:bg-brand group-hover:rotate-[360deg]
+            "
+          >
+            🎓
+          </div>
+
+          <h3 class="font-head font-bold text-dark text-xl mb-2">
+            Internship
+          </h3>
+
+          <p class="text-slate-600 text-[15px]">
+            Learn agriculture in the field, not just in the classroom.
+          </p>
+
+          <span
+            class="
+              inline-block mt-4
+              font-bold text-brand
+              transition-all
+              group-hover:pl-2
+            "
+          >
+            Explore →
+          </span>
+
+          <span
+            class="
+              absolute bottom-0 left-0
+              h-1 w-0
+              bg-gradient-to-r from-brand to-gold
+              transition-all duration-500
+              group-hover:w-full
+            "
+          ></span>
+        </a>
+
+      </div>
+      <!-- Cards ki grid khatam -->
+
+    </div>
+  </section>
+  <!-- Services khatam -->
+
+
+
+  <!-- ============================================================
+       8. CONTACT (details + form)
+       ============================================================ -->
+  <section id="contact" class="py-20 bg-white">
+    <div class="max-w-6xl mx-auto px-5">
+
+      <!-- Section ka heading -->
+      <div
+        data-reveal
+        class="
+          opacity-0 translate-y-10 transition duration-700
+          text-center max-w-2xl mx-auto mb-11
+        "
+      >
+        <h2 class="font-head font-extrabold text-dark text-3xl md:text-4xl">
+          Contact us
+        </h2>
+        <p class="text-slate-600 mt-3">
+          Product, soil test ya internship ke bare me poochhna hai? Form bhariye ya seedha hamse baat kijiye.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-8">
+
+
+        <!-- ---------- Left: contact details (dark green box) ----------
+             Apni asli details yahan badlein -->
+        <div
+          data-reveal
+          class="
+            lg:col-span-2
+            opacity-0 -translate-x-10 transition duration-700
+            rounded-3xl
+            bg-gradient-to-br from-dark to-brand
+            text-white
+            p-8 space-y-6
+          "
+        >
+
+          <h3 class="font-head font-bold text-2xl">
+            Let's talk about your farm
+          </h3>
+
+          <!-- Address -->
+          <a
+            href="https://maps.google.com/?q=Your+office+address"
+            target="_blank"
+            rel="noopener"
+            class="flex gap-4 group"
+          >
+            <span
+              class="
+                w-12 h-12 shrink-0
+                rounded-full bg-white/15
+                grid place-items-center text-xl
+                group-hover:bg-gold
+                transition
+              "
+            >📍</span>
+            <span>
+              <b class="block">Address</b>
+              <span class="text-green-100"> Ahmadpur, Bidupur, Vaishali, Bihar – 844502</span>
+            </span>
+          </a>
+
+          <!-- Email -->
+          <a
+            href="mailto:Krishnaagrotech23@gmail.com"
+            class="flex gap-4 group"
+          >
+            <span
+              class="
+                w-12 h-12 shrink-0
+                rounded-full bg-white/15
+                grid place-items-center text-xl
+                group-hover:bg-gold
+                transition
+              "
+            >✉️</span>
+            <span>
+              <b class="block">Email</b>
+              <span class="text-green-100">Krishnaagrotech23@gmail.com</span>
+            </span>
+          </a>
+
+          <!-- Phone -->
+          <a
+            href="tel:+91 6299791343"
+            class="flex gap-4 group"
+          >
+            <span
+              class="
+                w-12 h-12 shrink-0
+                rounded-full bg-white/15
+                grid place-items-center text-xl
+                group-hover:bg-gold
+                transition
+              "
+            >📞</span>
+            <span>
+              <b class="block">Phone</b>
+              <span class="text-green-100">+91 6299791343 </span>
+            </span>
+          </a>
+
+          <!-- WhatsApp button: number me apna number daalein (91 ke saath, bina + ke) -->
+          <a
+            href="https://wa.me/910000000000"
+            target="_blank"
+            rel="noopener"
+            class="
+              inline-block
+              px-6 py-3
+              rounded-full
+              bg-gold text-dark font-bold
+              hover:bg-yellow-300 hover:-translate-y-0.5
+              transition
+            "
+          >
+            💬 Chat on WhatsApp
+          </a>
+
+        </div>
+
+
+        <!-- ---------- Right: message form ---------- -->
+        <div
+          data-reveal
+          class="
+            lg:col-span-3
+            opacity-0 translate-x-10 transition duration-700
+            rounded-3xl
+            bg-cream
+            border border-green-100
+            p-8
+          "
+        >
+
+          <form id="contactForm" class="grid gap-4">
+
+            <!-- Naam aur phone (ek line me) -->
+            <div class="grid sm:grid-cols-2 gap-4">
+
+              <input
+                name="Name"
+                required
+                placeholder="Full name"
+                class="
+                  w-full px-4 py-3.5
+                  rounded-2xl
+                  border-2 border-green-100 bg-white
+                  focus:outline-none focus:border-brand focus:ring-4 focus:ring-soft
+                "
+              >
+
+              <input
+                name="Phone"
+                type="tel"
+                required
+                placeholder="Phone number"
+                class="
+                  w-full px-4 py-3.5
+                  rounded-2xl
+                  border-2 border-green-100 bg-white
+                  focus:outline-none focus:border-brand focus:ring-4 focus:ring-soft
+                "
+              >
+
+            </div>
+
+            <!-- Email -->
+            <input
+              name="Email"
+              type="email"
+              required
+              placeholder="Email address"
+              class="
+                w-full px-4 py-3.5
+                rounded-2xl
+                border-2 border-green-100 bg-white
+                focus:outline-none focus:border-brand focus:ring-4 focus:ring-soft
+              "
+            >
+
+            <!-- Kis cheez me interest hai (6 services bhi list me hain) -->
+            <select
+              name="Interested in"
+              required
+              class="
+                w-full px-4 py-3.5
+                rounded-2xl
+                border-2 border-green-100 bg-white
+                focus:outline-none focus:border-brand focus:ring-4 focus:ring-soft
+              "
+            >
+              <option value="">I am interested in</option>
+              <option>Bio-Fertilizers</option>
+              <option>Organic Manure</option>
+              <option>Bio-Pesticides</option>
+              <option>Seeds &amp; Soil Kits</option>
+              <option>Soil Testing</option>
+              <option>Agri Consultancy</option>
+              <option>Plant Care</option>
+              <option>Farmer Training</option>
+              <option>Training</option>
+              <option>Internship</option>
+            </select>
+
+            <!-- Message -->
+            <textarea
+              name="Message"
+              rows="4"
+              required
+              placeholder="Your message"
+              class="
+                w-full px-4 py-3.5
+                rounded-2xl
+                border-2 border-green-100 bg-white
+                focus:outline-none focus:border-brand focus:ring-4 focus:ring-soft
+              "
+            ></textarea>
+
+            <!-- Send button -->
+            <button
+              class="
+                px-8 py-3.5
+                rounded-full
+                bg-brand text-white font-bold
+                hover:bg-dark hover:-translate-y-0.5
+                transition
+              "
+            >
+              Send Message
+            </button>
+
+            <!-- Submit hone ke baad ye message dikhta hai -->
+            <p
+              id="formOk"
+              class="hidden bg-soft text-dark font-bold rounded-xl p-3"
+            >
+              Thank you! Aapka email app khul gaya hai, bas send dabaiye.
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Contact khatam -->
+
+  </main>
+
+
+
+  <!-- ============================================================
+       9. FOOTER (sabse neeche)
+          Navbar ki tarah yahan bhi Products aur Services ki
+          alag-alag list hai (Plant Care aur Training ke saath)
+       ============================================================ -->
+  <footer class="bg-dark text-green-100 pt-14">
+
+  <div
+  class="
+    max-w-6xl mx-auto px-5
+    grid grid-cols-1 sm:grid-cols-2
+    lg:grid-cols-[1.2fr_0.9fr_1fr_1fr_1.3fr]
+    gap-x-10 gap-y-12
+    pb-10
+  "
+>
+
+      <!-- ---------- Column 1: Logo aur chhota intro ---------- -->
+      <div class="lg:col-span-1">
+
+        <a
+          href="index.html"
+          class="
+            flex items-center gap-3
+            font-head font-extrabold text-white
+            text-sm leading-tight
+            mb-4
+          "
+        >
+          <!-- Footer me bhi wahi logo file (code chhota rehta hai) -->
+          <img
+            src="logoagro.png.jpeg"
+            alt="Vinayramkrishna Agro Tech logo"
+            class="
+              h-14 w-14
+              shrink-0
+              rounded-full object-contain
+              bg-white
+              ring-2 ring-white/20
+            "
+          >
+          <span>Vinayramkrishna<br>Agro Tech Pvt. Ltd.</span>
+        </a>
+
+        <p class="text-sm leading-7 text-green-100">
+  Helping farmers grow more with healthy soil, trusted inputs and practical guidance.
+  Serving farms since 2022.
+</p>
+        <!-- Social icons: apne asli links yahan daalein -->
+      
+<!-- Social Media Icons -->
+<div class="flex items-center gap-3 mt-4">
+
+  <!-- Instagram -->
+  <a
+    href="https://www.instagram.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+    title="Instagram"
+    class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-white text-xl hover:bg-gold hover:text-dark transition"
+  >
+    <i class="ri-instagram-line" aria-hidden="true"></i>
+  </a>
+
+  <!-- LinkedIn -->
+  <a
+    href="https://www.linkedin.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+    title="LinkedIn"
+    class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-white text-xl hover:bg-gold hover:text-dark transition"
+  >
+    <i class="ri-linkedin-fill" aria-hidden="true"></i>
+  </a>
+
+  <!-- Facebook -->
+  <a
+    href="https://www.facebook.com/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+    title="Facebook"
+    class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-white text-xl hover:bg-gold hover:text-dark transition"
+  >
+    <i class="ri-facebook-fill" aria-hidden="true"></i>
+  </a>
+
+</div>
+
+      </div>
+
+
+      <!-- ---------- Column 2: Quick links ---------- -->
+      <div>
+
+        <h4 class="font-head text-white text-lg mb-3">
+          Quick Links
+        </h4>
+
+        <ul class="space-y-3 text-sm leading-relaxed">
+          <li><a href="index.html" class="hover:text-gold">Home</a></li>
+          <li><a href="about.html" class="hover:text-gold">About Us</a></li>
+          <li><a href="career.html" class="hover:text-gold">Career</a></li>
+          <li><a href="get-started.html" class="hover:text-gold">Contact</a></li>
+        </ul>
+
+      </div>
+
+
+      <!-- ---------- Column 3: Products (navbar ke Products jaisa) ---------- -->
+      <div>
+
+        <h4 class="font-head text-white text-lg mb-3">
+          Products
+        </h4>
+
+      <ul class="space-y-3 text-sm leading-relaxed">
+          <li><a href="bio-fertilizers.html" class="hover:text-gold">Bio-Fertilizers</a></li>
+          <li><a href="organic-manure.html" class="hover:text-gold">Organic Manure</a></li>
+          <li><a href="bio-pesticides.html" class="hover:text-gold">Bio-Pesticides</a></li>
+          <li><a href="seeds-soil-kits.html" class="hover:text-gold">Seeds &amp; Soil Kits</a></li>
+        </ul>
+
+      </div>
+
+
+      <!-- ---------- Column 4: Services (navbar ke Services jaisa) ----------
+           NAYA: Plant Care aur Training yahan bhi jode gaye -->
+      <div>
+
+        <h4 class="font-head text-white text-lg mb-3">
+          Services
+        </h4>
+
+      <ul class="space-y-3 text-sm leading-relaxed">
+          <li><a href="soil-testing.html" class="hover:text-gold">Soil Testing</a></li>
+          <li><a href="agri-consultancy.html" class="hover:text-gold">Agri Consultancy</a></li>
+          <li><a href="plant-care.html" class="hover:text-gold">Plant Care</a></li>
+          <li><a href="farmer-training.html" class="hover:text-gold">Farmer Training</a></li>
+          <li><a href="training.html" class="hover:text-gold">Training</a></li>
+          <li><a href="internship.html" class="hover:text-gold">Internship</a></li>
+        </ul>
+
+      </div>
+
+
+      <!-- ---------- Column 5: Contact ----------
+           Apni asli details yahan badlein -->
+      <div>
+
+        <h4 class="font-head text-white text-lg mb-3">
+          Contact
+        </h4>
+
+       <ul class="space-y-4 text-sm leading-relaxed">
+
+          <li>📍 Ahmadpur, Bidupur, Vaishali, Bihar - 844502</li>
+
+       
+        <li class="flex items-center gap-2">
+                    <span>✉️</span>
+              <a href="mailto:Krishnaagrotech23@gmail.com" class="hover:text-gold">
+                Krishnaagrotech23@gmail.com</a>
+          </li>
+
+          <li>
+            📞
+            <a href="tel:+916299791343" class="hover:text-gold">
+              +91 6299791343
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+
+    <!-- ---------- Sabse neeche copyright ---------- -->
+    <div
+      class="
+        border-t border-white/15
+        mt-11 py-5
+        text-center text-sm
+      "
+    >
+      © 2022–<span id="yr"></span> Vinayramkrishna Agro Tech Private Limited. All rights reserved.
+    </div>
+
+  </footer>
+  <!-- Footer khatam -->
+
+
+
+  <!-- Chhota sa message jo Instagram share par "link copied" dikhata hai -->
+  <div
+    id="toast"
+    class="
+      fixed bottom-6 left-1/2
+      -translate-x-1/2 translate-y-24
+      bg-dark text-white
+      px-6 py-3
+      rounded-full
+      transition
+      z-50
+    "
+  ></div>
+
+
+
+  <!-- ============================================================
+       JAVASCRIPT
+       Har hissa alag number se likha hai, taaki samajhna aasan ho
+       ============================================================ -->
+  <script>
+
+    // Chhote shortcuts (baar baar lamba code na likhna pade)
+    //   $("#id")   = ek element dhoondhna
+    //   $$(".cls") = jitne milen, sab dhoondhna
+    const $  = selector => document.querySelector(selector);
+    const $$ = selector => [...document.querySelectorAll(selector)];
+
+
+
+    /* ==========================================================
+       1. Footer me current saal
+       ========================================================== */
+    $("#yr").textContent = new Date().getFullYear();
+
+
+
+    /* ==========================================================
+       2. Mobile menu kholna / band karna
+       ========================================================== */
+    const burger = $("#burger");   // hamburger button
+    const menu   = $("#menu");     // menu ki list
+
+    if (burger && menu) {
+
+      // Menu ke andar ke dropdown wale items (Products, Services, follow us)
+      const dropdownItems = menu.querySelectorAll(":scope > li.mobile-nav-dropdown");
+
+      // Desktop par hover/focus karne par sirf ek dropdown open rahega.
+      function closeDesktopDropdowns(exceptItem = null) {
+        dropdownItems.forEach(item => {
+          if (item !== exceptItem) item.classList.remove("desktop-dropdown-open");
+        });
+      }
+
+      dropdownItems.forEach(item => {
+        item.addEventListener("mouseenter", () => {
+          if (window.innerWidth >= 1280) {
+            closeDesktopDropdowns(item);
+            item.classList.add("desktop-dropdown-open");
+          }
+        });
+
+        item.addEventListener("mouseleave", () => {
+          if (window.innerWidth >= 1280) {
+            item.classList.remove("desktop-dropdown-open");
+          }
+        });
+
+        item.addEventListener("focusin", () => {
+          if (window.innerWidth >= 1280) {
+            closeDesktopDropdowns(item);
+            item.classList.add("desktop-dropdown-open");
+          }
+        });
+
+        item.addEventListener("focusout", event => {
+          if (window.innerWidth >= 1280 && !item.contains(event.relatedTarget)) {
+            item.classList.remove("desktop-dropdown-open");
+          }
+        });
+      });
+
+      // ----- Sab dropdown band karne wala function -----
+      function closeAllDropdowns() {
+
+        dropdownItems.forEach(item => {
+          item.classList.remove("mobile-open", "desktop-dropdown-open");
+
+          const button = item.querySelector(":scope > .nav-dropdown-toggle");
+          if (button) {
+            button.setAttribute("aria-expanded", "false");
+          }
+        });
+
+      }
+
+
+      // ----- Menu khola ya band kiya (open = true/false) -----
+      function setMenuOpen(open) {
+
+        menu.classList.toggle("hidden", !open);
+        burger.setAttribute("aria-expanded", String(open));
+        burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+
+        // Menu band ho to dropdown bhi band
+        if (!open) {
+          closeAllDropdowns();
+        }
+
+      }
+
+
+      // ----- Hamburger par click -----
+      burger.addEventListener("click", () => {
+        const isOpen = burger.getAttribute("aria-expanded") === "true";
+        setMenuOpen(!isOpen);
+      });
+
+
+      // ----- Dropdown button par click (mobile me) -----
+      dropdownItems.forEach(item => {
+
+        const button = item.querySelector(":scope > .nav-dropdown-toggle");
+        if (!button) return;
+
+        button.addEventListener("click", () => {
+
+          const willOpen = button.getAttribute("aria-expanded") !== "true";
+
+          // Pehle baki sab dropdown band karo
+          closeAllDropdowns();
+
+          // Phir sirf ye wala kholo (ya band rehne do)
+          item.classList.toggle("mobile-open", willOpen);
+          button.setAttribute("aria-expanded", String(willOpen));
+
+        });
+
+      });
+
+
+      // ----- Kisi link par click karo to mobile menu band ho jaye -----
+      menu.querySelectorAll("a").forEach(link => {
+
+        link.addEventListener("click", () => {
+          if (window.innerWidth < 1280) {
+            setMenuOpen(false);
+          }
+        });
+
+      });
+
+
+      // ----- Esc dabane par menu band -----
+      document.addEventListener("keydown", event => {
+
+        const isOpen = burger.getAttribute("aria-expanded") === "true";
+
+        if (event.key === "Escape" && isOpen) {
+          setMenuOpen(false);
+          burger.focus();
+        }
+
+      });
+
+
+      // ----- Menu ke bahar click karne par menu band -----
+      document.addEventListener("click", event => {
+
+        const isOpen = burger.getAttribute("aria-expanded") === "true";
+        const clickedInside = menu.contains(event.target) || burger.contains(event.target);
+
+        if (isOpen && !clickedInside) {
+          setMenuOpen(false);
+        }
+
+      });
+
+    }
+
+
+
+    /* ==========================================================
+       3. HERO SLIDER
+       ========================================================== */
+    const slides = $$(".slide");        // 4 slides
+    const dots   = $$(".dot");          // 4 dots
+    const bar    = $("#bar");           // progress bar
+    const count  = $("#count");         // 01, 02, 03, 04
+
+    const TIME = 6500;                  // har slide 6.5 second dikhegi
+    let now = 0;                        // abhi kaun si slide (0 = pehli)
+    let timer;                          // agli slide ka timer
+
+
+    // ----- Dot ko active (lamba, golden) dikhana -----
+    function showDot(i) {
+      dots[i].classList.replace("w-3", "w-11");
+      dots[i].classList.replace("bg-white/50", "bg-gold");
+    }
+
+    // ----- Dot ko normal (chhota, safed) karna -----
+    function hideDot(i) {
+      dots[i].classList.replace("w-11", "w-3");
+      dots[i].classList.replace("bg-gold", "bg-white/50");
+    }
+
+
+    // ----- Slide number n par jaao -----
+    function go(n) {
+
+      // 1) Purani slide hatao
+      slides[now].classList.remove("on");
+      hideDot(now);
+
+      // 2) Nayi slide chuno (last ke baad wapas pehli)
+      now = (n + slides.length) % slides.length;
+
+      // 3) Nayi slide dikhao
+      slides[now].classList.add("on");
+      showDot(now);
+
+      // 4) Number badlo: 01, 02, 03, 04
+      count.textContent = "0" + (now + 1);
+
+      // 5) Progress bar dobara shuru karo
+      bar.style.animation = "none";
+      bar.offsetWidth;                                    // browser ko reset samjhane ke liye
+      bar.style.animation = `fill ${TIME}ms linear forwards`;
+
+      // 6) Apne aap agli slide par jaane ka timer
+      clearTimeout(timer);
+      timer = setTimeout(() => go(now + 1), TIME);
+
+    }
+
+
+    // ----- Arrow buttons -----
+    $("#next").onclick = () => go(now + 1);
+    $("#prev").onclick = () => go(now - 1);
+
+
+    // ----- Dot par click = us slide par jao -----
+    dots.forEach((dot, i) => {
+      dot.onclick = () => go(i);
+    });
+
+
+    // ----- Mouse upar aaye to slider ruk jaye, hatane par phir chale -----
+    $("#hero").onmouseenter = () => {
+      clearTimeout(timer);
+      bar.style.animationPlayState = "paused";
+    };
+
+    $("#hero").onmouseleave = () => go(now);
+
+
+    // ----- Mobile par swipe se slide badalna -----
+    let touchStartX = 0;
+
+    $("#hero").ontouchstart = e => {
+      touchStartX = e.touches[0].clientX;
+    };
+
+    $("#hero").ontouchend = e => {
+
+      const distance = e.changedTouches[0].clientX - touchStartX;
+
+      // 50px se zyada swipe ho tabhi slide badle
+      if (Math.abs(distance) > 50) {
+        go(distance < 0 ? now + 1 : now - 1);
+      }
+
+    };
+
+
+    // ----- Keyboard ke left / right arrow -----
+    onkeydown = e => {
+      if (e.key === "ArrowRight") go(now + 1);
+      if (e.key === "ArrowLeft")  go(now - 1);
+    };
+
+
+    // ----- Shuruat: pehle dot ko active dikhao, phir slider chalu -----
+    showDot(0);
+    go(0);
+
+
+
+    /* ==========================================================
+       4. Scroll karne par cheezein dheere se aayein
+          (aur numbers 0 se ginti shuru karein)
+       ========================================================== */
+    const seen = new IntersectionObserver(entries => {
+
+      entries.forEach(entry => {
+
+        // Jo cheez abhi screen par nahi aayi, usse chhod do
+        if (!entry.isIntersecting) return;
+
+        const el = entry.target;
+
+
+        // ----- (a) Ek row ke cards ek ke baad ek aayein -----
+        const sameRow = [...el.parentElement.children]
+          .filter(child => child.hasAttribute("data-reveal"));
+
+        el.style.transitionDelay = sameRow.indexOf(el) * 120 + "ms";
+
+
+        // ----- (b) Chhupi hui cheez ko apni jagah laao -----
+        el.classList.remove(
+          "opacity-0",
+          "translate-y-10",
+          "-translate-x-10",
+          "translate-x-10"
+        );
+
+
+        // ----- (c) Delay hatao taaki hover tez chale -----
+        setTimeout(() => {
+          el.style.transitionDelay = "";
+        }, 1000);
+
+
+        // ----- (d) Is cheez ko dobara dekhne ki zarurat nahi -----
+        seen.unobserve(el);
+
+
+        // ----- (e) Agar ye number hai to 0 se ginti shuru karo -----
+        const numberEl = el.querySelector("[data-count]");
+
+        if (numberEl) {
+
+          const end    = +numberEl.dataset.count;        // kahan tak ginna hai
+          const suffix = numberEl.dataset.suffix || "";  // jaise "%"
+          let current  = 0;
+
+          const counter = setInterval(() => {
+
+            current += Math.max(1, Math.ceil(end / 40));
+
+            if (current >= end) {
+              current = end;
+              clearInterval(counter);
+            }
+
+            numberEl.textContent = current + suffix;
+
+          }, 35);
+
+        }
+
+      });
+
+    }, { threshold: 0.15 });
+
+
+    // data-reveal wali har cheez ko dekhna shuru karo
+    $$("[data-reveal]").forEach(el => seen.observe(el));
+
+
+
+    /* ==========================================================
+       5. Share buttons (Instagram / LinkedIn / Facebook)
+       ========================================================== */
+    const INSTAGRAM_LINK = "https://www.instagram.com/";   // yahan apna Instagram link daalein
+
+    $$("[data-share]").forEach(button => {
+
+      button.onclick = () => {
+
+        const url  = encodeURIComponent(location.href);   // is page ka link
+        const site = button.dataset.share;                // instagram / linkedin / facebook
+
+        if (site === "linkedin") {
+
+          open("https://www.linkedin.com/sharing/share-offsite/?url=" + url, "_blank");
+
+        } else if (site === "facebook") {
+
+          open("https://www.facebook.com/sharer/sharer.php?u=" + url, "_blank");
+
+        } else {
+
+          // Instagram me direct share nahi hota,
+          // isliye link copy karke Instagram kholte hain
+          if (navigator.clipboard) {
+            navigator.clipboard.writeText(location.href);
+          }
+
+          const toast = $("#toast");
+          toast.textContent = "Link copied. Opening Instagram…";
+          toast.classList.remove("translate-y-24");
+
+          setTimeout(() => toast.classList.add("translate-y-24"), 2600);
+
+          open(INSTAGRAM_LINK, "_blank");
+
+        }
+
+      };
+
+    });
+
+
+
+    /* ==========================================================
+       6. Contact form: submit par email app khulta hai
+       ========================================================== */
+    const CONTACT_EMAIL = "Krishnaagrotech23@gmail.com";   
+
+    $("#contactForm").onsubmit = e => {
+
+      // Page reload mat karo
+      e.preventDefault();
+
+      // Form ke sab fields ko text me jodo
+      const data = new FormData(e.target);
+
+      const body = [...data.entries()]
+        .map(([name, value]) => name + ": " + value)
+        .join("\n");
+
+      // Email app kholo
+      location.href =
+        `mailto:${CONTACT_EMAIL}` +
+        `?subject=${encodeURIComponent("Website enquiry")}` +
+        `&body=${encodeURIComponent(body)}`;
+
+      // Thank-you message dikhao
+      $("#formOk").classList.remove("hidden");
+
+      // Form khali karo
+      e.target.reset();
+
+    };
+
+
+
+    /* ==========================================================
+       7. Purane bookmark / links ko naye pages par bhejna
+          (left side = purana link, right side = naya page)
+       ========================================================== */
+    const oldLinks = {
+      "#/product/bio-fertilizers":   "bio-fertilizers.html",
+      "#/product/organic-manure":    "organic-manure.html",
+      "#/product/crop-protection":   "bio-pesticides.html",
+      "#/product/seeds-kits":        "seeds-soil-kits.html",
+      "#/service/soil-testing":      "soil-testing.html",
+      "#/service/agri-consultancy":  "agri-consultancy.html",
+      "#/service/farmer-training":   "farmer-training.html",
+      "#/service/internship":        "internship.html"
+    };
+
+    if (oldLinks[location.hash]) {
+      location.replace(oldLinks[location.hash]);
+    }
+
+  </script>
+
+</body>
+
+</html>

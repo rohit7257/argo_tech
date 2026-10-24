@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Vinayramkrishna Agro Tech Pvt. Ltd.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="footer.js" defer></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: "#137a3a",
+            dark: "#0b4d27",
+            soft: "#e6f2e2",
+            cream: "#f7faf1",
+            gold: "#e3b23c"
+          },
+          fontFamily: {
+            head: ["Fraunces", "serif"],
+            body: ['"Nunito Sans"', "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { overflow-x: hidden; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(25px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: .12s; }
+    .delay-2 { transition-delay: .24s; }
+    .delay-3 { transition-delay: .36s; }
+
+    .pulse-btn { animation: pulse 2.4s infinite; }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(19,122,58,.48); }
+      70% { box-shadow: 0 0 0 12px rgba(19,122,58,0); }
+      100% { box-shadow: 0 0 0 0 rgba(19,122,58,0); }
+    }
+
+    .float-leaf { animation: float 5s ease-in-out infinite; }
+
+    @keyframes float {
+      50% { transform: translateY(-12px) rotate(4deg); }
+    }
+
+    .falling-leaves {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .leaf {
+      position: absolute;
+      top: -40px;
+      font-size: 20px;
+      opacity: .75;
+      animation: fall linear infinite;
+    }
+
+    .leaf:nth-child(1) { left: 10%; animation-duration: 11s; }
+    .leaf:nth-child(2) { left: 32%; animation-duration: 14s; animation-delay: 2s; }
+    .leaf:nth-child(3) { left: 58%; animation-duration: 12s; animation-delay: 4s; }
+    .leaf:nth-child(4) { left: 82%; animation-duration: 15s; animation-delay: 1s; }
+
+    @keyframes fall {
+      0% { transform: translateY(-40px) rotate(0deg); }
+      100% { transform: translateY(750px) rotate(360deg); }
+    }
+
+    .image-zoom img { transition: transform .8s ease; }
+    .image-zoom:hover img { transform: scale(1.05); }
+
+    .menu-toggle {
+      width: 44px;
+      height: 44px;
+      border: 1px solid #d8e8d2;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: white;
+    }
+
+    .menu-toggle-icon {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle-icon i {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #0b4d27;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+
+    .menu-toggle.active .menu-toggle-icon i:first-child {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active .menu-toggle-icon i:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active .menu-toggle-icon i:last-child {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-caret {
+      display: inline-block;
+      margin-left: 4px;
+      transition: transform .2s ease;
+    }
+
+    .mobile-nav-dropdown.desktop-dropdown-open .nav-caret {
+      transform: rotate(180deg);
+    }
+
+    .desktop-dropdown-menu { display: none; }
+
+    @media (min-width: 1280px) {
+      .mobile-nav-dropdown:hover > .desktop-dropdown-menu,
+      .mobile-nav-dropdown.desktop-dropdown-open > .desktop-dropdown-menu {
+        display: block;
+      }
+    }
+
+    @media (max-width: 1279px) {
+      #menu {
+        position: absolute;
+        top: 78px;
+        left: 0;
+        right: 0;
+        background: white;
+        max-height: 80vh;
+        overflow-y: auto;
+        gap: 12px;
+      }
+
+      #menu.hidden { display: none; }
+      #menu:not(.hidden) { display: flex; }
+      #menu .mobile-nav-dropdown ul { display: none; }
+
+      #menu .mobile-nav-dropdown.mobile-dropdown-open ul {
+        display: block;
+      }
+
+      #menu .nav-share-item { margin-bottom: 12px; }
+      #menu .contact-menu-item { margin-top: 4px; }
+    }
+
+    .about-card {
+      transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 18px 35px rgba(22,101,52,.13);
+      border-color: #bbf7d0;
+    }
+
+    .about-icon { transition: transform .35s ease; }
+
+    .about-card:hover .about-icon {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .social-link {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      color: white;
+      background: rgba(255,255,255,.08);
+      font-size: 19px;
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+
+    .social-link:hover {
+      background: #e3b23c;
+      color: #0b4d27;
+      transform: translateY(-4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body class="font-body text-slate-800 bg-cream leading-relaxed">
+
+<!-- NAVBAR -->
+<header class="sticky top-0 z-50 bg-cream/95 backdrop-blur border-b border-green-100">
+  <nav class="max-w-6xl mx-auto px-5 h-[78px] flex items-center justify-between">
+
+    <a href="index.html" class="flex items-center gap-3 font-head font-extrabold text-dark text-sm leading-tight">
+      <img src="logoagro.png.jpeg" alt="Vinayramkrishna Agro Tech logo" class="h-12 w-12 sm:h-14 sm:w-14 rounded-full object-contain bg-white ring-2 ring-green-100 shadow-sm">
+      <span>Vinayramkrishna<br>Agro Tech Pvt. Ltd.</span>
+    </a>
+
+    <button id="burger" type="button" class="menu-toggle xl:hidden shrink-0" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+      <span class="menu-toggle-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+
+    <ul id="menu" class="hidden xl:flex absolute xl:static top-[78px] left-0 right-0 bg-white xl:bg-transparent flex-col xl:flex-row xl:items-center gap-1 p-5 xl:p-0 shadow-lg xl:shadow-none max-h-[80vh] overflow-auto xl:overflow-visible">
+      <li><a href="index.html" class="block px-4 py-2 rounded-full font-semibold hover:bg-soft hover:text-brand transition">Home</a></li>
+      <li><a href="about.html" aria-current="page" class="block px-4 py-2 rounded-full font-semibold bg-soft text-brand">About</a></li>
+
+      <li class="group relative mobile-nav-dropdown">
+        <button type="button" aria-expanded="false" class="nav-dropdown-toggle block px-4 py-2 rounded-full font-semibold hover:bg-soft hover:text-brand">
+          Products <span class="nav-caret">▾</span>
+        </button>
+        <ul class="pl-4 xl:pl-2 xl:absolute xl:top-full xl:left-0 desktop-dropdown-menu xl:min-w-[230px] xl:bg-white xl:rounded-2xl xl:p-2 xl:shadow-xl">
+          <li><a href="bio-fertilizers.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🌱 Bio-Fertilizers</a></li>
+          <li><a href="organic-manure.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🍂 Organic Manure</a></li>
+          <li><a href="bio-pesticides.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🛡️ Bio-Pesticides</a></li>
+          <li><a href="seeds-soil-kits.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🌾 Seeds &amp; Soil Kits</a></li>
+        </ul>
+      </li>
+
+      <li class="group relative mobile-nav-dropdown">
+        <button type="button" aria-expanded="false" class="nav-dropdown-toggle block px-4 py-2 rounded-full font-semibold hover:bg-soft hover:text-brand">
+          Services <span class="nav-caret">▾</span>
+        </button>
+        <ul class="pl-4 xl:pl-2 xl:absolute xl:top-full xl:left-0 desktop-dropdown-menu xl:min-w-[230px] xl:bg-white xl:rounded-2xl xl:p-2 xl:shadow-xl">
+          <li><a href="soil-testing.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🧪 Soil Testing</a></li>
+          <li><a href="agri-consultancy.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">📋 Agri Consultancy</a></li>
+          <li><a href="plant-care.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🌿 Plant Care</a></li>
+          <li><a href="farmer-training.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">👩‍🌾 Farmer Training</a></li>
+          <li><a href="training.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🧑‍🏫 Training</a></li>
+          <li><a href="internship.html" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">🎓 Internship</a></li>
+        </ul>
+      </li>
+
+      <li><a href="career.html" class="block px-4 py-2 rounded-full font-semibold hover:bg-soft hover:text-brand">Career</a></li>
+
+      <li class="group relative mobile-nav-dropdown xl:mx-3 nav-share-item">
+        <button type="button" aria-expanded="false" class="nav-dropdown-toggle block px-4 py-2 rounded-full font-semibold border-2 border-green-200 bg-white">
+          ⤴ Follow Us <span class="nav-caret">▾</span>
+        </button>
+        <ul class="pl-4 xl:pl-2 xl:absolute xl:top-full xl:right-0 desktop-dropdown-menu xl:min-w-[170px] xl:bg-white xl:rounded-2xl xl:p-2 xl:shadow-xl">
+          <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">📸 Instagram</a></li>
+          <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">💼 LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 rounded-xl text-sm hover:bg-soft">👍 Facebook</a></li>
+        </ul>
+      </li>
+
+      <li class="contact-menu-item">
+        <a href="get-started.html" class="pulse-btn block text-center px-8 py-3 rounded-full font-extrabold text-white bg-gradient-to-br from-green-500 to-dark shadow-lg hover:from-gold hover:to-yellow-300 hover:text-dark transition">Contact Us</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="relative min-h-[610px] md:min-h-[680px] flex items-center overflow-hidden bg-dark">
+  <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1920&q=85" alt="Green crop rows on a farm" fetchpriority="high" class="absolute inset-0 w-full h-full object-cover object-center">
+  <div class="absolute inset-0 bg-gradient-to-r from-green-950/90 via-green-950/65 to-green-950/10"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-green-950/45 via-transparent to-green-950/10"></div>
+
+  <div class="falling-leaves" aria-hidden="true">
+    <span class="leaf">🍃</span><span class="leaf">🍂</span><span class="leaf">🍃</span><span class="leaf">🍂</span>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto w-full px-5 py-24 text-white">
+    <div class="max-w-3xl">
+      <span class="reveal inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-4 py-2 text-sm font-bold text-yellow-100">✦ ABOUT OUR COMPANY</span>
+      <h1 class="reveal delay-1 mt-6 font-head font-extrabold text-5xl sm:text-6xl md:text-7xl leading-tight">
+        Better soil.<br><span class="text-yellow-300">Brighter harvests.</span>
+      </h1>
+      <p class="reveal delay-2 mt-6 max-w-xl text-lg md:text-xl text-green-50">
+        We bring farmers trusted agricultural inputs and practical support to help every field reach its potential.
+      </p>
+      <div class="reveal delay-3 mt-9 flex flex-wrap gap-3">
+        <a href="#our-story" class="inline-flex items-center gap-3 rounded-full bg-gold px-7 py-3.5 text-dark font-extrabold shadow-lg hover:-translate-y-1 hover:bg-yellow-300 transition">Discover our story →</a>
+        <a href="get-started.html" class="inline-flex items-center rounded-full border border-white/60 bg-white/10 px-7 py-3.5 font-bold hover:bg-white hover:text-dark transition">Talk to our team</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 inset-x-0 h-2 bg-gradient-to-r from-brand via-gold to-brand"></div>
+</section>
+<!-- OUR STORY -->
+<section id="our-story" class="py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+    <div class="reveal image-zoom relative rounded-[2rem] overflow-hidden shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1400&q=85" alt="Agricultural field in the countryside" loading="lazy" class="w-full h-[380px] md:h-[510px] object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-green-950/55 via-transparent to-transparent"></div>
+      <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between text-white">
+        <span class="font-head font-bold text-xl md:text-2xl">Grounded in agriculture</span>
+        <span class="text-4xl">🌱</span>
+      </div>
+      <div class="absolute top-5 left-5 rounded-full bg-gold px-4 py-2 text-dark text-sm font-extrabold">SINCE 2022</div>
+    </div>
+
+    <div class="reveal delay-1">
+      <span class="inline-flex items-center gap-2 text-brand font-extrabold tracking-widest uppercase text-sm">
+        <span class="w-8 h-[2px] bg-gold"></span> Who we are
+      </span>
+
+      <h2 class="mt-4 font-head font-extrabold text-dark text-4xl md:text-5xl leading-tight">
+        Rooted in the land.<br>Here for the farmer.
+      </h2>
+
+      <p class="mt-6 text-slate-600 text-lg">
+        Vinayramkrishna Agro Tech Pvt. Ltd. is built around a simple belief: healthy soil is the starting point for strong farms and sustainable growth.
+      </p>
+
+      <p class="mt-4 text-slate-600">
+        We connect farmers with bio-fertilizers, organic manure, crop protection, seeds, soil testing and field guidance. Our aim is to make useful products and dependable support easier to find.
+      </p>
+
+      <div class="mt-8 grid grid-cols-2 gap-4">
+        <div class="rounded-2xl border border-green-100 bg-white p-5 hover:shadow-lg transition">
+          <b class="font-head text-3xl text-brand">4</b>
+          <span class="block text-sm font-bold text-slate-600 mt-1">Product lines</span>
+        </div>
+        <div class="rounded-2xl border border-green-100 bg-white p-5 hover:shadow-lg transition">
+          <b class="font-head text-3xl text-brand">Farm</b>
+          <span class="block text-sm font-bold text-slate-600 mt-1">Focused support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION AND VISION -->
+<section class="relative overflow-hidden bg-gradient-to-br from-brand to-dark py-20 md:py-24 text-white">
+  <div class="absolute -right-20 -top-24 h-80 w-80 rounded-full border border-white/10"></div>
+  <div class="absolute -right-8 -top-12 h-56 w-56 rounded-full border border-white/10"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="text-yellow-200 font-extrabold uppercase tracking-widest text-sm">Purpose in every season</span>
+      <h2 class="font-head font-extrabold text-4xl md:text-5xl mt-3">What drives us forward</h2>
+      <p class="mt-4 text-green-100">A clear purpose, shared with the farming community.</p>
+    </div>
+
+    <div class="mt-12 grid md:grid-cols-2 gap-6">
+      <article class="reveal rounded-3xl border border-white/15 bg-white/10 p-8 md:p-10 hover:-translate-y-2 transition">
+        <div class="grid h-16 w-16 place-items-center rounded-2xl bg-gold text-3xl text-dark">🌱</div>
+        <p class="mt-7 text-yellow-200 font-extrabold uppercase tracking-widest text-xs">Our mission</p>
+        <h3 class="mt-2 font-head font-bold text-3xl">Help farms thrive</h3>
+        <p class="mt-4 text-green-50">
+          Support farmers with quality agricultural inputs and practical guidance that nurture soil health, support productive crops and build confidence in the field.
+        </p>
+      </article>
+
+      <article class="reveal delay-1 rounded-3xl border border-white/15 bg-white/10 p-8 md:p-10 hover:-translate-y-2 transition">
+        <div class="grid h-16 w-16 place-items-center rounded-2xl bg-white text-3xl">🌾</div>
+        <p class="mt-7 text-yellow-200 font-extrabold uppercase tracking-widest text-xs">Our vision</p>
+        <h3 class="mt-2 font-head font-bold text-3xl">A resilient future</h3>
+        <p class="mt-4 text-green-50">
+          Contribute to a farming future where healthier soils, informed choices and responsible practices help farmers and rural communities prosper.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE HELP -->
+<section class="py-20 md:py-28">
+  <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
+
+    <div class="reveal">
+      <span class="inline-flex items-center gap-2 text-brand font-extrabold tracking-widest uppercase text-sm">
+        <span class="w-8 h-[2px] bg-gold"></span> How we help
+      </span>
+
+      <h2 class="mt-4 font-head font-extrabold text-dark text-4xl md:text-5xl leading-tight">
+        Useful solutions.<br>
+        Practical guidance.
+      </h2>
+
+      <p class="mt-5 text-slate-600 text-lg">
+        From the soil beneath the crop to the decisions made in the field, our product range and farmer services are designed around everyday agricultural needs.
+      </p>
+
+      <div class="mt-8 space-y-4">
+        <div class="flex gap-4 rounded-2xl p-4 hover:bg-white hover:shadow-md transition">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-soft text-2xl">🧪</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Care for soil health</h3>
+            <p class="text-slate-600 text-sm">Bio-fertilizers, organic manure and soil testing.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 rounded-2xl p-4 hover:bg-white hover:shadow-md transition">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-yellow-100 text-2xl">🛡️</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Support for crops</h3>
+            <p class="text-slate-600 text-sm">Crop protection, seed and soil kits for the season.</p>
+          </div>
+        </div>
+
+        <div class="flex gap-4 rounded-2xl p-4 hover:bg-white hover:shadow-md transition">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-green-100 text-2xl">👩‍🌾</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Knowledge in the field</h3>
+            <p class="text-slate-600 text-sm">Agri consultancy, farmer training and internships.</p>
+          </div>
+        </div>
+      </div>
+
+     <a href="#agricultural-solutions"
+   class="inline-flex mt-5 items-center gap-2 font-extrabold text-brand hover:text-dark transition">
+  Explore our solutions →
+</a>
+    </div>
+
+    <div class="reveal delay-1 image-zoom relative rounded-[2rem] overflow-hidden shadow-2xl">
+      <img
+        src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1100&q=85"
+        alt="Farmer caring for growing crops"
+        loading="lazy"
+        class="w-full h-[390px] md:h-[510px] object-cover">
+
+      <div class="absolute inset-0 bg-gradient-to-t from-dark/70 via-transparent to-transparent"></div>
+
+      <div class="absolute bottom-6 left-6 right-6 rounded-2xl border border-white/30 bg-white/15 backdrop-blur-md p-5 text-white">
+        <p class="font-head font-bold text-xl">Better farming starts with good support.</p>
+        <p class="text-sm text-green-50 mt-1">Products and services for the whole growing journey.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 1: VALUES -->
+<section id="our-values" class="py-16 md:py-20 bg-gradient-to-br from-green-50 to-white">
+  <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-[.95fr_1.05fr] gap-10 lg:gap-14 items-center">
+
+    <div class="reveal relative overflow-hidden rounded-[2rem] min-h-[360px] md:min-h-[450px] bg-green-100">
+      <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=85" alt="Green agricultural fields" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
+      <div class="absolute inset-0 bg-gradient-to-t from-green-950/80 via-green-950/10 to-transparent"></div>
+      <div class="absolute top-6 left-6 rounded-full bg-white/90 px-4 py-2 text-sm font-extrabold text-dark">OUR VALUES</div>
+      <div class="absolute bottom-7 left-7 right-7 text-white">
+        <h2 class="font-head text-3xl md:text-4xl font-extrabold leading-tight">People, Farming<br>and a Better <span class="text-yellow-300">Tomorrow.</span></h2>
+        <p class="mt-3 max-w-md text-green-50 leading-7">We are committed to supporting farmers and building trusted relationships across agriculture.</p>
+      </div>
+    </div>
+
+    <div class="space-y-7">
+      <article class="reveal flex gap-4 items-start">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-green-100 text-2xl">🤝</span>
+        <div>
+          <h3 class="font-head text-xl md:text-2xl font-bold text-dark">Mutual Respect</h3>
+          <p class="mt-2 text-slate-600 leading-7">We value respectful, transparent and meaningful relationships with farmers, customers, partners and stakeholders.</p>
+        </div>
+      </article>
+
+      <article class="reveal delay-1 flex gap-4 items-start">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-yellow-100 text-2xl">🛡️</span>
+        <div>
+          <h3 class="font-head text-xl md:text-2xl font-bold text-dark">Integrity and Accountability</h3>
+          <p class="mt-2 text-slate-600 leading-7">We aim to communicate clearly, take responsibility and work towards shared goals with care and honesty.</p>
+        </div>
+      </article>
+
+      <article class="reveal delay-2 flex gap-4 items-start">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-green-100 text-2xl">👥</span>
+        <div>
+          <h3 class="font-head text-xl md:text-2xl font-bold text-dark">Diversity and Inclusion</h3>
+          <p class="mt-2 text-slate-600 leading-7">We respect different backgrounds, ideas and experiences, and believe everyone should be treated fairly.</p>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- AGRICULTURE BANNER -->
+<section id="agriculture-banner" class="py-12 md:py-16 bg-yellow-50">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="reveal relative overflow-hidden rounded-[2rem] bg-gradient-to-r from-yellow-50 via-amber-50 to-green-50 border border-yellow-100">
+      <div class="grid lg:grid-cols-2 items-center gap-8 p-6 sm:p-10 md:p-12">
+
+        <div class="flex items-end justify-center gap-4 order-2 lg:order-1">
+          <div class="w-40 sm:w-48 rounded-t-[2rem] border-[6px] border-slate-800 bg-white p-2 shadow-xl -rotate-3 hover:-translate-y-2 transition duration-300">
+            <div class="rounded-t-2xl bg-dark text-white text-xs font-bold p-3">Vinayramkrishna<br><span class="font-normal">Agro Tech Pvt. Ltd.</span></div>
+            <div class="p-3">
+              <div class="rounded-xl bg-green-50 p-3 text-center text-3xl">🌱</div>
+              <p class="mt-3 text-xs font-extrabold text-dark">Agricultural Products</p>
+              <div class="mt-2 grid grid-cols-2 gap-2 text-center text-[10px]">
+                <span class="rounded-lg bg-green-50 p-2">🌿<br>Fertilizers</span>
+                <span class="rounded-lg bg-yellow-50 p-2">🌾<br>Seeds</span>
+                <span class="rounded-lg bg-green-50 p-2">🧪<br>Soil Kits</span>
+                <span class="rounded-lg bg-yellow-50 p-2">🍂<br>Manure</span>
+              </div>
+              <div class="mt-3 rounded-full bg-brand py-2 text-center text-[10px] font-bold text-white">Explore Products</div>
+            </div>
+          </div>
+
+          <div class="mb-2 w-36 sm:w-44 rounded-t-[2rem] border-[6px] border-slate-800 bg-white p-2 shadow-xl rotate-3 hover:-translate-y-2 transition duration-300">
+            <div class="rounded-t-2xl bg-green-50 p-4 text-center text-4xl">🌿</div>
+            <div class="p-3">
+              <p class="text-xs font-extrabold text-dark">Plant Care</p>
+              <p class="mt-2 text-[10px] text-slate-600">Helpful guidance for your farm and plants.</p>
+              <div class="mt-3 rounded-full bg-gold py-2 text-center text-[10px] font-bold text-dark">Learn More</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="inline-flex rounded-full bg-green-100 px-4 py-2 text-sm font-extrabold uppercase tracking-wider text-dark">Our Agricultural Support</span>
+          <h2 class="mt-5 font-head text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-dark">Explore Our Products on Your <span class="text-brand">Farming Journey.</span></h2>
+          <p class="mt-5 leading-7 text-slate-600">Discover agricultural products and services, learn about soil health and connect with our team for information about available support.</p>
+
+          <ul class="mt-5 space-y-3 text-slate-700">
+            <li class="flex gap-3 items-center"><span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand text-white text-sm">✓</span>Explore products and services</li>
+            <li class="flex gap-3 items-center"><span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand text-white text-sm">✓</span>Find soil testing and crop guidance</li>
+          </ul>
+
+          <a href="index.html" class="pulse-btn inline-flex mt-7 items-center gap-3 rounded-full bg-gold px-7 py-3.5 font-extrabold text-dark shadow-lg hover:-translate-y-1 hover:bg-yellow-300 transition">Visit Our Website <span aria-hidden="true">→</span></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGRICULTURAL SOLUTIONS -->
+<section id="agricultural-solutions" class="py-16 md:py-20 bg-white">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <div>
+        <span class="inline-flex rounded-full bg-green-100 px-4 py-2 text-sm font-extrabold uppercase tracking-wider text-dark">What We Offer</span>
+        <h2 class="mt-4 font-head text-3xl sm:text-4xl md:text-5xl font-extrabold text-dark">Our Agricultural <span class="text-brand">Solutions</span></h2>
+      </div>
+      <p class="max-w-xl text-slate-600 leading-7">From soil health to crop care, explore products and services designed around everyday agricultural needs.</p>
+    </div>
+
+    <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <a href="bio-fertilizers.html" class="about-card reveal group rounded-3xl border border-green-100 bg-cream p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="about-icon grid h-14 w-14 shrink-0 place-items-center rounded-full bg-green-100 text-3xl">🌱</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Bio-Fertilizers</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Explore products intended to support soil health and crop nutrition.</p>
+          </div>
+        </div>
+        <span class="mt-5 inline-flex text-brand font-extrabold text-sm">Explore Products →</span>
+      </a>
+
+      <a href="organic-manure.html" class="about-card reveal delay-1 group rounded-3xl border border-green-100 bg-cream p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="about-icon grid h-14 w-14 shrink-0 place-items-center rounded-full bg-yellow-100 text-3xl">🍂</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Organic Manure</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Learn about organic matter and its role in soil management.</p>
+          </div>
+        </div>
+        <span class="mt-5 inline-flex text-brand font-extrabold text-sm">Explore Products →</span>
+      </a>
+
+      <a href="bio-pesticides.html" class="about-card reveal delay-2 group rounded-3xl border border-green-100 bg-cream p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="about-icon grid h-14 w-14 shrink-0 place-items-center rounded-full bg-green-100 text-3xl">🛡️</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Bio-Pesticides</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Discover crop-protection options and follow recommended usage instructions.</p>
+          </div>
+        </div>
+        <span class="mt-5 inline-flex text-brand font-extrabold text-sm">Explore Products →</span>
+      </a>
+
+      <a href="seeds-soil-kits.html" class="about-card reveal group rounded-3xl border border-green-100 bg-cream p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="about-icon grid h-14 w-14 shrink-0 place-items-center rounded-full bg-yellow-100 text-3xl">🌾</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Seeds &amp; Soil Kits</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Explore resources for seasonal planning and soil assessment.</p>
+          </div>
+        </div>
+        <span class="mt-5 inline-flex text-brand font-extrabold text-sm">Explore Products →</span>
+      </a>
+
+      <a href="soil-testing.html" class="about-card reveal delay-1 group rounded-3xl border border-green-100 bg-cream p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="about-icon grid h-14 w-14 shrink-0 place-items-center rounded-full bg-cyan-100 text-3xl">🧪</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Soil Testing</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Understand soil conditions to make informed farming decisions.</p>
+          </div>
+        </div>
+        <span class="mt-5 inline-flex text-brand font-extrabold text-sm">Explore Services →</span>
+      </a>
+
+      <a href="agri-consultancy.html" class="about-card reveal delay-2 group rounded-3xl border border-green-100 bg-cream p-6 shadow-sm">
+        <div class="flex items-start gap-4">
+          <span class="about-icon grid h-14 w-14 shrink-0 place-items-center rounded-full bg-green-100 text-3xl">👩‍🌾</span>
+          <div>
+            <h3 class="font-head font-bold text-dark text-lg">Agri Consultancy</h3>
+            <p class="mt-2 text-sm leading-6 text-slate-600">Explore guidance for crop care and everyday agricultural questions.</p>
+          </div>
+        </div>
+        <span class="mt-5 inline-flex text-brand font-extrabold text-sm">Explore Services →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+<!-- CONTACT CTA -->
+<section class="py-14 md:py-20 bg-cream">
+  <div class="reveal relative max-w-6xl mx-auto px-6 md:px-12 py-10 md:py-14 overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand to-dark text-white shadow-xl">
+    <div class="absolute -right-12 -bottom-24 h-72 w-72 rounded-full border border-white/10"></div>
+
+    <div class="relative flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div class="max-w-2xl">
+        <p class="font-extrabold uppercase tracking-widest text-yellow-200 text-sm">With farmers, every season</p>
+        <h2 class="font-head font-extrabold text-3xl md:text-4xl mt-3">Good farming grows with good support.</h2>
+        <p class="mt-4 text-green-50">Have questions about our products or services? Get in touch with our team.</p>
+      </div>
+
+      <a href="get-started.html" class="pulse-btn inline-flex shrink-0 items-center gap-3 rounded-full bg-gold px-7 py-3.5 font-extrabold text-dark shadow-lg hover:bg-yellow-300 transition">
+        Contact Us <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+ <main-footer></main-footer>
+
+<!-- JAVASCRIPT -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // Current year in footer
+  const yearElement = document.getElementById("yr");
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // Mobile hamburger menu
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("menu");
+
+  if (burger && menu) {
+    burger.addEventListener("click", () => {
+      const isOpen = !menu.classList.contains("hidden");
+
+      menu.classList.toggle("hidden", isOpen);
+      burger.classList.toggle("active", !isOpen);
+      burger.setAttribute("aria-expanded", String(!isOpen));
+      burger.setAttribute("aria-label", isOpen ? "Open menu" : "Close menu");
+    });
+
+    // Dropdown menus on mobile and desktop
+    const dropdownItems = menu.querySelectorAll(".mobile-nav-dropdown");
+
+    dropdownItems.forEach(item => {
+      const button = item.querySelector(".nav-dropdown-toggle");
+      if (!button) return;
+
+      button.addEventListener("click", event => {
+        event.preventDefault();
+
+        const desktop = window.innerWidth >= 1280;
+        const openClass = desktop ? "desktop-dropdown-open" : "mobile-dropdown-open";
+        const isOpen = item.classList.contains(openClass);
+
+        dropdownItems.forEach(otherItem => {
+          otherItem.classList.remove("desktop-dropdown-open", "mobile-dropdown-open");
+
+          const otherButton = otherItem.querySelector(".nav-dropdown-toggle");
+          if (otherButton) {
+            otherButton.setAttribute("aria-expanded", "false");
+          }
+        });
+
+        if (!isOpen) {
+          item.classList.add(openClass);
+          button.setAttribute("aria-expanded", "true");
+        }
+      });
+    });
+
+    // Close mobile menu after clicking a link
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 1280) {
+          menu.classList.add("hidden");
+          burger.classList.remove("active");
+          burger.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+
+    // Reset menu when screen size changes
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 1280) {
+        menu.classList.remove("hidden");
+      } else {
+        menu.classList.add("hidden");
+      }
+
+      burger.classList.remove("active");
+      burger.setAttribute("aria-expanded", "false");
+
+      dropdownItems.forEach(item => {
+        item.classList.remove("mobile-dropdown-open", "desktop-dropdown-open");
+
+        const button = item.querySelector(".nav-dropdown-toggle");
+        if (button) {
+          button.setAttribute("aria-expanded", "false");
+        }
+      });
+    });
+  }
+
+  // Scroll reveal animation
+  const revealElements = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+  } else {
+    revealElements.forEach(element => element.classList.add("show"));
+  }
+});
+</script>
+
+</body>
+</html>
